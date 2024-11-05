@@ -1,0 +1,40 @@
+int main () {
+	 FILE* fp = fopen("/home/users/level03/.pass", "r");
+    
+    if (fp == 0)
+    {
+        fwrite("ERROR: failed to open password f…", 1, 36, stderr);
+        exit(1);
+    }
+    
+    int count = fread(buff1, 1, 41, fp);
+    
+    if (count != 41)
+    {
+        fwrite("ERROR: failed to read password f…", 1, 36, stderr);
+        fwrite("ERROR: failed to read password f…", 1, 36, stderr);
+        exit(1);
+    }
+    
+    fclose(fp);
+    puts("===== [ Secure Access System v1.…");
+    puts("/*******************************…");
+    puts("| You must login to access this …");
+    puts("\\*******************************…");
+    printf("--[ Username: ");
+    fgets(str1, 100, stdin);
+    printf("--[ Password: ");
+    fgets(str2, 100, stdin);
+    puts("********************************…");
+    
+    if (strncmp(buff1, str2, 41) == 0)
+    {
+        printf("Greetings, %s!\n", &str1);
+        system("/bin/sh");
+        return 0;
+    }
+    
+    printf(&str1);
+    puts(" does not have access!");
+    exit(1);
+}
