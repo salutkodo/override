@@ -101,9 +101,9 @@ print("Result of XOR between string1 and string2:")
 print(repr(result))
 ```
 
-I've used this script to find what input I should use.
-*\x12 XOR Q = C* (while 0x12 = 18)
-So I have to somehow put 12 as a parameter of function decrypt.
+I've used this script to find what input I should use.\
+*0x12 XOR Q = C* (while 0x12 = 18)\
+So I have to somehow put 18 as a parameter of function decrypt.
 Since I've seen that from test we get inside decrypt by substracting param2 with param1.
 I'll just use **322424845** - 18**.
 
