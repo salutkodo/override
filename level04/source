@@ -1,0 +1,25 @@
+int main()
+{
+	char* input;
+    int child = fork();
+    if (!child)
+    {
+        ptrace(0, 0, 0);
+        puts("Give me some shellcode, k");
+        gets(&input);
+        return 0;
+    }
+    while (true)
+    {
+        wait(&var);
+        int status = ptrace(3, child, 44);
+        if (status == PTRACE_PEEKUSER)
+        {
+            puts("no exec() for you");
+            kill(child, 9);
+            return 0;
+        }
+    }
+    puts("child is exiting...");
+    return 0;
+}
