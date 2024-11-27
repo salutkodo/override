@@ -1,0 +1,45 @@
+bool auth(char *login, int serialNumber)
+{
+  int i;
+  int val; // [esp+18h] [ebp-10h]
+  int len; // [esp+1Ch] [ebp-Ch]
+
+  login[strcspn(login, "\n")] = 0;
+  len = strnlen(login, 32);
+  if ( len <= 5 )
+    return 1;
+
+  else
+  {
+    val = (login[3] ^ 0x1337) + 6221293;
+    for ( i = 0; i < len; ++i )
+    {
+      if ( login[i] <= 31 )
+        return 1;
+      val += (val ^ (unsigned int)login[i]) % 0x539;
+    }
+    return serialNumber != val;
+  }
+}
+
+int main()
+{
+  int v4;
+  char s[30];
+
+  puts("***********************************");
+  puts("*\t\tlevel06\t\t  *");
+  puts("***********************************");
+  printf("-> Enter Login: ");
+  fgets(s, 30, stdin);
+  puts("***********************************");
+  puts("***** NEW ACCOUNT DETECTED ********");
+  puts("***********************************");
+  printf("-> Enter Serial: ");
+  scanf(int, &v4);
+  if ( auth(s, v4) )
+    return 1;
+  puts("Authenticated!");
+  system("/bin/sh");
+  return 0;
+}
